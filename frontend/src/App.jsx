@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import PostDetails from './pages/PostDetails';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/posts/post/:id' element={<PostDetails />} />
         <Route path='/write' element={<CreatePost />} />
         <Route path="/edit" element={<EditPost />} />
+        <Route path='/profile' element={<Profile />} />
         {/* Add more routes as needed */}
       </Routes>
       
