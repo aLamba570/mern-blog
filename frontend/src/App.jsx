@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path='/posts/post/:id' element={<PostDetails />} />
         <Route path='/write' element={<CreatePost />} />
-        <Route path="/edit/:id" element={<EditPost />} />
+        <Route path="/edit" element={<EditPost />} />
         {/* Add more routes as needed */}
       </Routes>
       
