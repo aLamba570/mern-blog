@@ -6,6 +6,10 @@ dotenv.config()
 const app = express()
 app.use(cors())
 
+const authRoute = require('./routes/auth')
+app.use(express.json())
+app.use('/api/auth', authRoute)
+
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL)
