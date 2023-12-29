@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import mine from "../components/mine.jpg";
+import Comments from "../components/Comments";
 
 const PostDetails = () => {
   return (
@@ -36,7 +37,7 @@ const PostDetails = () => {
         <img src={mine} alt=" " className="h-[400px] w-full object-cover" />
         <p className="mx-auto mt-8">
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          industry. Lorem Ipsum has been the industry  standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book. It has survived not only
           five centuries, but also the leap into electronic typesetting,
@@ -93,6 +94,7 @@ const PostDetails = () => {
 
                 <p className="px-4 mt-2">Nice Information</p>
             </div>
+            <Comments/>
         </div>
 
         {/* write comment */}
