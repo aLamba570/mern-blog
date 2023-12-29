@@ -3,29 +3,40 @@ const router = express.Router()
 const User = require('../models/User')
 const bycrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const Post = require('../models/Post')
+const Comment = require('../models/Comment')
 
-// Register
-router.post('/register', async(req, res) =>{
+
+//update user
+
+router.put("/:id", async (req, res) =>{
     try{
-        const {username, email, password} = req.body;
-        const newUser = new User({username, email, password});
-        const savedUser = await newUser.save()
-        res.status(200).json(savedUser)
+        if(req.body.password){
+            const salt = await bycrypt.genSalt(10);
+            req.body.password = await bycrypt.hashSync(req.body.password, salt);
+        }
+        const updateUser = await User.findByIdAndUpdate(req.params.id, {
+            $set: req.body,
+        },{new:true});
+        res.status(200).json(updateUser);
     }
     catch(err){
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
+
 })
 
 
+//delete user
 
-
-
-// Login
-
-
-
-
-
-
-//Logut
+router.delete("/:id", async (req, res) => {
+    try{
+        await User.findByIdAndDelete(req.params.id);
+        await Post.deleteMany({userId: req.params.id});
+        await Comment.deleteMany({userId: req.params.id});
+        res.status(200).json("User deleted");
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
+})
