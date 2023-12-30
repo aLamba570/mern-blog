@@ -5,11 +5,12 @@ const Comment = require('../models/Comment');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../verifyToken');
 
 
 // Create a post
 
-router.post('/write', async (req, res) => {
+router.post('/write', verifyToken, async (req, res) => {
     try{
         const newPost = new Post(req.body);
         const savedPost = await newPost.save();
@@ -24,7 +25,7 @@ router.post('/write', async (req, res) => {
 
 // Update a post
 
-router.put('/:id',  async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
     try{
         const updatePost = await Post.findByIdAndUpdate(req.params.id, {$set:req.body}, {new:true});
         res.status(200).json(updatePost)
@@ -37,7 +38,7 @@ router.put('/:id',  async (req, res) => {
 
 // Delete a post
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
     try {
         // Delete posts associated with the user
         
@@ -67,14 +68,19 @@ router.get('/:id', async (req, res) =>{
 
 //get all posts
 
-router.get('/', async (req, res) =>{
+router.get("/",async (req,res)=>{
+    const query=req.query
+    
     try{
-        const posts = await Post.find({});
-        res.status(200).json(posts);
+        const searchFilter={
+            title:{$regex:query.search, $options:"i"}
+        }
+        const posts=await Post.find(query.search?searchFilter:null)
+        res.status(200).json(posts)
     }
     catch(err){
-        res.status(500).json(err);
-    }   
+        res.status(500).json(err)
+    }
 })
 
 

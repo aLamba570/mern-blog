@@ -5,10 +5,11 @@ const User = require('../models/User');
 const bycrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Post = require('../models/Post');
+const verifyToken = require('../verifyToken');
 const Comment = require('../models/Comment');
 
 // Route to update user information
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyToken , async (req, res) => {
     try {
         // Check if the request body includes a password
         if (req.body.password) {
@@ -31,7 +32,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Route to delete user
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
     try {
         // Delete user, posts, and comments associated with the user
         await User.findByIdAndDelete(req.params.id);
@@ -45,6 +46,7 @@ router.delete("/:id", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 
 // Route to get a user by ID
 router.get("/:id", async (req, res) => {
