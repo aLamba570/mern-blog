@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json("Wrong password");
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "5d" });
+        const token = jwt.sign({ id: user._id, username: user.username, email:user.email }, process.env.JWT_SECRET, { expiresIn: "5d" });
         const { password, ...info } = user._doc;
         res.cookie("token", token).status(200).json(info);
     } catch (err) {
@@ -52,6 +52,18 @@ router.get('/logout', (req, res)=>{
     catch(err){
         res.status(500).json(err);
     }
+})
+
+// REFETCH USER
+
+router.get('/refetch', async (req, res) => {
+    const token = req.cookies.token;
+    jwt.verify(token, process.env.JWT_SECRET, async(err, data)=>{
+        if(err){
+            res.status(401).json("Unauthorized");
+        }
+        res.status(200).json(data);
+    })
 })
 
 module.exports = router;

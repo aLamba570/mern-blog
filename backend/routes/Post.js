@@ -42,7 +42,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
     try {
         // Delete posts associated with the user
         
-        await Post.deletfieMany({ userId: req.params.id });
+        await Post.deleteMany({ userId: req.params.id });
 
         // Respond with a success message
         res.status(200).json("Post deleted");
