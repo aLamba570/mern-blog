@@ -8,9 +8,11 @@ app.use(cors())
 
 const authRoute = require('./routes/auth')
 const userRoute = require('./routes/User')
+const postRoute = require('./routes/Post')
 app.use(express.json())
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
+app.use('/api/posts', postRoute)
 
 const connectDB = async () => {
     try {
