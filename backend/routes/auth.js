@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
 });
 
 // Login
-
+-
 // Login
 router.post('/login', async (req, res) => {
     try {
@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json("Wrong password");
         }
 
-        const token = jwt.sign({ id: user._id, username: user.username, email:user.email }, process.env.JWT_SECRET, { expiresIn: "5d" });
+        const token = jwt.sign({ id: user._id, username: user.username, email:user.email }, process.env.JWT_SECRET, { expiresIn: "20d" });
         const { password, ...info } = user._doc;
         res.cookie("token", token).status(200).json(info);
     } catch (err) {

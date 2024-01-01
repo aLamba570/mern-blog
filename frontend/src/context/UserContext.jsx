@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
 import {URL} from '../url';
@@ -24,6 +25,8 @@ export const UserContextProvider = ({children}) => {
             console.error(err);
         }
     }
+
+    
     
     return (
         <UserContext.Provider value={{user, setUser}}>

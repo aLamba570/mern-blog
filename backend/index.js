@@ -38,6 +38,8 @@ const connectDB = async () => {
 };
 
 
+
+
 app.listen(process.env.PORT, () =>{
     connectDB()
     console.log('backend server is running')
