@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [prompt, setPrompt] = useState(" ");
-  console.log(prompt)
   const navigate = useNavigate();
 
   const showMenu = () => {
