@@ -12,7 +12,7 @@ Before you begin, ensure you have met the following requirements:
 To get started with this project, follow these steps:
 
 1. Clone the repository to your local machine:
-   git clone https://github.com/your-username/mern-stack-project.git
+   git clone (https://github.com/aLamba570/mern-blog.git)
 
 2. Navigate to the project directory:
    cd mern-blog
